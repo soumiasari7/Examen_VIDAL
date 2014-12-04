@@ -1,0 +1,145 @@
+package ExtraInfoProgDepart;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
+
+
+public class ExtraInfo 
+{
+	private static PrintWriter ecrire;
+	private static PrintWriter ecrire2;
+
+	public static void main(String[] args) throws IOException 
+	{  
+		char c;
+		String urlstart;
+		ecrire = new PrintWriter("subst");
+		//spécifier l'URL (plus tard), elle sera insérée dans une boîte de saisie de type InputDialog
+	    JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+	    URL pageURL = null;
+		try {
+		    urlstart= jop.showInputDialog(null, "URL", "Entree", JOptionPane.QUESTION_MESSAGE);	
+			URL url = new URL(urlstart);
+			
+			  URLConnection conn = url.openConnection();
+              BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+              in.readLine();
+              in.close();
+
+		} 
+		
+	      //////erreur probleme connexion////////////
+			catch (UnknownHostException e)
+			{
+				System.err.println(e);
+				JOptionPane jop4 = new JOptionPane();
+			    jop4.showMessageDialog(null, "Problème de connexion à Internet!", "Message", JOptionPane.ERROR_MESSAGE);
+			    System.exit(0);
+			}
+		
+	     //////erreur url vide////////////
+		
+		   catch (MalformedURLException e) 
+		     {
+				   System.err.println(e);
+				   JOptionPane jop3 = new JOptionPane();
+			    	jop3.showMessageDialog(null, "Vous n'avez pas saisie l'URL", "Message", JOptionPane.ERROR_MESSAGE);
+			    	System.exit(0);
+			}
+	      
+			for (c = 'A'; c <= 'Z'; c++){
+	    
+	    //URL url = new URL("http://www.vidal.fr/Sommaires/Substances-C.htm");// Ou bien...
+		 urlstart="http://www.vidal.fr/Sommaires/Substances-"+c+".htm";
+		
+		//Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter ("subst.dic")) ;//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+		URL url = new URL(urlstart);
+		
+		//instancier un objet de la classe URL
+		System.out.println("URL à aspirer ==>"+url);
+		
+		//imprimer cet objet
+		BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
+		
+		
+		do
+		//faire ce qui suit
+		{
+			String line = lire.readLine();
+		
+			System.out.println(line);
+			if(line == null)
+			{
+				break;
+			}
+
+			ecrire.write(line);
+			ecrire.write(System.getProperty("line.separator"));
+			
+			//générer dans sauts de ligne
+		} while(true);
+		//tant que c'est vrai (true)
+		
+	    //fermer le flux d'écriture
+	   ecrire.close();
+	   ecrire= new PrintWriter(new FileOutputStream ("subst",true)); 
+	    }
+		
+	 
+	///////////////////////////////////////// les médicaments par nom commercial //////////////////////////////////////////////////////
+	    //////////////////////////////////////////////////////////////////////////
+	    
+		ecrire2 = new PrintWriter("medic");
+	    for (c = 'A'; c <= 'Z'; c++){
+	    	
+		//URL url = new URL("http://www.vidal.fr/Sommaires/Medicaments-A.htm");// Ou bien...
+		urlstart="http://www.vidal.fr/Sommaires/Medicaments-"+c+".htm";
+		
+		//spécifier l'URL (plus tard), elle sera insérée dans une boîte de saisie de type InputDialog
+		
+		
+ 		//Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter ("subst.dic")) ;//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+		URL url = new URL(urlstart);
+		
+		//instancier un objet de la classe URL
+		System.out.println("URL à aspirer ==>"+url);
+		//imprimer cet objet
+		
+	
+		BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
+		
+		
+		do
+		//faire ce qui suit
+		{
+			String line = lire.readLine();
+		
+			System.out.println(line);
+			if(line == null)
+			{
+				break;
+			}
+
+			ecrire2.write(line);
+			ecrire2.write(System.getProperty("line.separator"));
+			
+			//générer dans sauts de ligne
+		} while(true);
+		//tant que c'est vrai (true)
+		
+		//fermer le flux d'écriture
+	   ecrire2.close();
+	   ecrire2= new PrintWriter(new FileOutputStream ("medic",true)); 
+	    }
+		
+	    }
+	}
+	
