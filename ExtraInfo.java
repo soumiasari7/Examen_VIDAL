@@ -32,7 +32,11 @@ public class ExtraInfo {
 		catch (UnknownHostException e) {
 			System.err.println(e);
 			JOptionPane.showMessageDialog(null,
+<<<<<<< HEAD
 					"Problème de connexion à Internet!", "Message",
+=======
+					"ProblÃ¨me de connexion Ã  Internet!", "Message",
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
@@ -52,13 +56,21 @@ public class ExtraInfo {
 			urlstart = "http://www.vidal.fr/Sommaires/Substances-" + c + ".htm";
 
 			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
+<<<<<<< HEAD
 			//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+=======
+			//FileWriter n'accepte pas un 2Ã¨me argument pour spÃ©cifier l'encodage
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 			
 			// instancier un objet de la classe URL
 			URL url = new URL(urlstart);
             
 			// imprimer cet objet
+<<<<<<< HEAD
 			System.out.println("URL à aspirer ==>" + url);
+=======
+			System.out.println("URL Ã  aspirer ==>" + url);
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 
 			
 			BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -75,13 +87,21 @@ public class ExtraInfo {
 
 				ecrire.write(line);
 				
+<<<<<<< HEAD
 				// générer dans sauts de ligne
+=======
+				// gÃ©nÃ©rer dans sauts de ligne
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 				ecrire.write(System.getProperty("line.separator"));
 
 			// tant que c'est vrai (true)	
 			} while (true);
 			
+<<<<<<< HEAD
             // fermer le flux d'écriture
+=======
+            // fermer le flux d'Ã©criture
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 			ecrire.close();
 			
 			//concatenation 
@@ -90,7 +110,11 @@ public class ExtraInfo {
 		
 
 		 //////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 		/////////////// Les Médicaments par Nom Commercial///////////////////
+=======
+		/////////////// Les MÃ©dicaments par Nom Commercial///////////////////
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 		//////////////////////////////////////////////////////////////////////
 
 		ecrire2 = new PrintWriter("medic");
@@ -101,16 +125,27 @@ public class ExtraInfo {
 			// Ou bien...
 			urlstart = "http://www.vidal.fr/Sommaires/Medicaments-" + c+ ".htm";
 
+<<<<<<< HEAD
 			// spécifier l'URL (plus tard), elle sera insérée dans une boîte de saisie de type InputDialog
 
 			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
 			//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+=======
+			// spÃ©cifier l'URL (plus tard), elle sera insÃ©rÃ©e dans une boÃ®te de saisie de type InputDialog
+
+			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
+			//FileWriter n'accepte pas un 2Ã¨me argument pour spÃ©cifier l'encodage
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 			
 			// instancier un objet de la classe URL
 			URL url = new URL(urlstart);
 
 			// imprimer cet objet
+<<<<<<< HEAD
 			System.out.println("URL à aspirer ==>" + url);
+=======
+			System.out.println("URL Ã  aspirer ==>" + url);
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 			
 
 			BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -127,13 +162,21 @@ public class ExtraInfo {
 
 				ecrire2.write(line);
 				
+<<<<<<< HEAD
 				// générer dans sauts de ligne
+=======
+				// gÃ©nÃ©rer dans sauts de ligne
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 				ecrire2.write(System.getProperty("line.separator"));
 				
              // tant que c'est vrai (true)
 			} while (true);
 			
+<<<<<<< HEAD
 			// fermer le flux d'écriture
+=======
+			// fermer le flux d'Ã©criture
+>>>>>>> bf405a7602303ffd4882a4ec96af537b78098f08
 			ecrire2.close();
 			
 			//concatenation 
