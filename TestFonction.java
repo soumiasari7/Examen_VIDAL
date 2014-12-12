@@ -1,7 +1,6 @@
 import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
 public class TestFonction {
 
