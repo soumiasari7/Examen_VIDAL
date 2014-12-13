@@ -1,5 +1,6 @@
 package ExtraInfoProgDepart;
 
+<<<<<<< HEAD
 import java.awt.*;
 import java.io.*;
 import java.net.*;
@@ -8,6 +9,23 @@ import javax.swing.*;
 /*import java.util.regex.*; expression reg*/
 
 public class ExtraInfo implements Runnable {
+=======
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+public class ExtraInfo {
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 	private static PrintWriter ecrire;
 	private static PrintWriter ecrire2;
 
@@ -18,7 +36,11 @@ public class ExtraInfo implements Runnable {
 		ecrire = new PrintWriter("subst");
 
 		try {
+<<<<<<< HEAD
 			// =====================Creation boite de Saisi URL=========================//
+=======
+			//=====================Creation boite de Saisie URL=========================//
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 			urlstart = JOptionPane.showInputDialog(null, "URL", "Entree",JOptionPane.QUESTION_MESSAGE);
 			URL url = new URL(urlstart);
 
@@ -26,6 +48,7 @@ public class ExtraInfo implements Runnable {
 			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			in.readLine();
 			in.close();
+<<<<<<< HEAD
 
 			// =========================Bo�te de saisie du nom de fichier contenant le r�sultat asprie======//
 			new JOptionPane();
@@ -62,6 +85,44 @@ public class ExtraInfo implements Runnable {
 
 		// ====================Erreur URL Vide========================//
 
+=======
+			
+
+			//=========================Boîte de saisie du nom de fichier contenant le résultat asprie======//		
+					JOptionPane jop = new JOptionPane();
+					JOptionPane.showInputDialog(null, "File name ", "Entree",
+							JOptionPane.QUESTION_MESSAGE);
+					
+			//==================enregistré  dans  un  emplacement selon le choix de l’utilisateur via  une boîte de dialogue==========//
+						JFileChooser filechoose = new JFileChooser();
+					// Créer un JFileChooser
+					   filechoose.setCurrentDirectory(new File(".")); 
+					   // Le répertoire source du JFileChooser est le répertoire d’où est lancé notre programme
+					   String approve = new String("Choisir l'emplacement d'enregistement du ficher aspire");
+					// Le bouton pour valider l’enregistrement portera la mention ENREGSITRER
+					   int resultatEnregistrer = filechoose.showDialog(filechoose,approve);
+					   // Pour afficher le JFileChooser…
+					   if (resultatEnregistrer == JFileChooser.APPROVE_OPTION)
+						  // Si l’utilisateur clique sur le bouton ENREGSITRER
+					   { String monFichier= new String(filechoose.getSelectedFile().toString());
+					// Récupérer le nom du fichier qu’il a spécifié
+					System.out.print("\n"+monFichier);
+					      } 
+		}
+
+		//====================Erreur probleme connexion==============//
+		
+		catch (UnknownHostException e) {
+			System.err.println(e);
+			JOptionPane.showMessageDialog(null,
+					"Problème de connexion à Internet!", "Message",
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
+
+		//====================Erreur URL Vide========================//
+		
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 		catch (MalformedURLException e) {
 			System.err.println(e);
 			JOptionPane.showMessageDialog(null, "Vous n'avez pas saisie l'URL","Message", JOptionPane.ERROR_MESSAGE);
@@ -123,13 +184,22 @@ public class ExtraInfo implements Runnable {
 			urlstart = "http://www.vidal.fr/Sommaires/Substances-" + c + ".htm";
 
 			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
+<<<<<<< HEAD
 			// FileWriter n'accepte pas un 2�me argument pour sp�cifierl'encodage
 
+=======
+			//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+			
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 			// instancier un objet de la classe URL
 			URL url = new URL(urlstart);
 
 			// imprimer cet objet
+<<<<<<< HEAD
 			System.out.println("URL � aspirer ==>" + url);
+=======
+			System.out.println("URL à aspirer ==>" + url);
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 
 			BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
 
@@ -146,14 +216,24 @@ public class ExtraInfo implements Runnable {
 				}
 
 				ecrire.write(line);
+<<<<<<< HEAD
 
 				// g�n�rer dans sauts de ligne
+=======
+				
+				// générer dans sauts de ligne
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 				ecrire.write(System.getProperty("line.separator"));
 
 				// tant que c'est vrai (true)
 			} while (true);
+<<<<<<< HEAD
 
 			// fermer le flux d'�criture
+=======
+			
+            // fermer le flux d'écriture
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 			ecrire.close();
 
 			// concatenation
@@ -163,9 +243,15 @@ public class ExtraInfo implements Runnable {
 			progressBar.setValue(0);
 		}
 
+<<<<<<< HEAD
 		// ////////////////////////////////////////////////////////////////////
 		// ///////////// Les M�dicaments par Nom Commercial///////////////////
 		// ////////////////////////////////////////////////////////////////////
+=======
+		 //////////////////////////////////////////////////////////////////////
+		/////////////// Les Médicaments par Nom Commercial///////////////////
+		//////////////////////////////////////////////////////////////////////
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 
 		ecrire2 = new PrintWriter("medic");
 
@@ -176,17 +262,30 @@ public class ExtraInfo implements Runnable {
 			// Ou bien...
 			urlstart = "http://www.vidal.fr/Sommaires/Medicaments-" + c+ ".htm";
 
+<<<<<<< HEAD
 			// sp�cifier l'URL (plus tard), elle sera ins�r�e dans une bo�te de
 			// saisie de type InputDialog
 
 			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
 			// FileWriter n'accepte pas un 2�me argument pour sp�cifier l'encodage
 
+=======
+			// spécifier l'URL (plus tard), elle sera insérée dans une boîte de saisie de type InputDialog
+
+			// Ou bien PrintWriter ecrire =new PrintWriter (new FileWriter("subst.dic")) ;
+			//FileWriter n'accepte pas un 2ème argument pour spécifier l'encodage
+			
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 			// instancier un objet de la classe URL
 			URL url = new URL(urlstart);
 
 			// imprimer cet objet
+<<<<<<< HEAD
 			System.out.println("URL � aspirer ==>" + url);
+=======
+			System.out.println("URL à aspirer ==>" + url);
+			
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 
 			BufferedReader lire = new BufferedReader(new InputStreamReader(url.openStream()));
 
@@ -201,14 +300,24 @@ public class ExtraInfo implements Runnable {
 				}
 
 				ecrire2.write(line);
+<<<<<<< HEAD
 
 				// g�n�rer dans sauts de ligne
+=======
+				
+				// générer dans sauts de ligne
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 				ecrire2.write(System.getProperty("line.separator"));
 
 				// tant que c'est vrai (true)
 			} while (true);
+<<<<<<< HEAD
 
 			// fermer le flux d'�criture
+=======
+			
+			// fermer le flux d'écriture
+>>>>>>> 55392a38fc94ac15dea9d8bba7ff5635570af379
 			ecrire2.close();
 
 			// concatenation
