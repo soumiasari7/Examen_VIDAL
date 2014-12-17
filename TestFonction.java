@@ -64,7 +64,8 @@ public class TestFonction {
 		frame.pack();
 		frame.setVisible(true);
 		
-		// progressBar.setValue(d);
+//Appele au  Menu 
+		new Menu();
 
 	}
 	
