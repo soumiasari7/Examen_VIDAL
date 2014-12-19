@@ -331,7 +331,7 @@ public class ExtraInfo {
 		  
 		 for (String readline : arrayOfStrings){
 			
-			 ecrire3.write( readline.toLowerCase() + "\n");
+			 ecrire3.write( readline.toLowerCase() + ",.N+medic"+"\n");
 			
 		     }
 		// fermer le flux d'écriture
@@ -359,7 +359,7 @@ public class ExtraInfo {
 			System.out.println(s);
 			
 			if (s!="") {
-				ecrire4.write(s);
+				ecrire4.write(s+",.N+subst");
 			    ecrire4.write(System.getProperty("line.separator"));}
 
 		} while (true);
