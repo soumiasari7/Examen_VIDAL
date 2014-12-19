@@ -15,8 +15,8 @@ public class ExtraInfo {
 	private static PrintWriter ecrire2;
     private static Pattern pattern;
 	private static Matcher matcher;
-	private static PrintWriter ecrire3;
-	private static PrintWriter ecrire4;
+	private static BufferedWriter ecrire3;
+	private static BufferedWriter ecrire4;
 	private static BufferedReader buff2;
 	private static BufferedReader buff;
 	static int length=1;
@@ -78,7 +78,10 @@ public class ExtraInfo {
 // =====================Creation boite de Saisi URL=========================//
 			urlstart = JOptionPane.showInputDialog(null, "URL", "Entree",
 					JOptionPane.QUESTION_MESSAGE);
+			
+			
 			URL url = new URL(urlstart);
+			
 			URLConnection conn = url.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					conn.getInputStream()));
@@ -151,6 +154,7 @@ public class ExtraInfo {
 		panel1.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		frame.setContentPane(panel1);
 		frame.setVisible(true);
+		
 // =========================Boîte de saisie du nom de fichier contenant le résultat asprie======//
 		new JOptionPane();
 		nomfich = JOptionPane.showInputDialog(null, "File name ","Entree", JOptionPane.QUESTION_MESSAGE);
@@ -183,6 +187,7 @@ public class ExtraInfo {
 		ecrire=new PrintWriter(file);
 		JOptionPane.showMessageDialog(null,"Debut de l’aspiration Medicament par substutance", "Message",JOptionPane.INFORMATION_MESSAGE);
 		for (c = 'A'; c <= 'Z'; c++) {
+			
 			progressBar2.setValue(c);
 			label.setText("En cours ...");
 			frame.pack();
@@ -259,6 +264,11 @@ public class ExtraInfo {
 		ecrire2=new PrintWriter(file2);
 
 		for (c = 'A'; c <= 'Z'; c++) {
+			if (c=='D'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-D.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='E';}
+			else if (c=='M'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-M.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-N.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='O';}
+			else if (c=='S'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-S.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='T';}
+			
 			progressBar2.setValue(c);
 			label.setText("En cours ...");
 			frame.pack();
@@ -299,6 +309,7 @@ public class ExtraInfo {
 			progressBar.setValue(0);
 		}
 		JOptionPane.showMessageDialog(null, "Fin de l’aspiration !", "Message",JOptionPane.INFORMATION_MESSAGE);
+		
 		frame.hide();
 //========================================================================================//
 //                           ETAP2:lecture fichier medic                                  //
@@ -348,7 +359,7 @@ public class ExtraInfo {
 //========================================================================================//
 		
 		buff2 = new BufferedReader(new FileReader("subst"));
-        ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic"), "UTF-16LE"));
+        ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic"), "UTF-16"));
 		do
 		// faire ce qui suit
 		{
@@ -368,7 +379,7 @@ public class ExtraInfo {
 		// fermer le flux d'écriture
 		ecrire4.close();
 		// concatenation
-		ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic", true), "UTF-16LE"));
+		ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic", true), "UTF-16"));
 			
 		JOptionPane.showMessageDialog(null, "Fin de creation subst.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
 		
