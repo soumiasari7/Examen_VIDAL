@@ -6,6 +6,9 @@ import java.net.*;
 
 import javax.swing.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.regex.*; /* expression reg*/
 public class ExtraInfo {
 	private static PrintWriter ecrire;
@@ -50,11 +53,6 @@ public class ExtraInfo {
 		        res1 = matcher.group(1);
 		    }
 		    return res1;
-	}
-	
-	public static String miniscule(String mot){
-		mot.toLowerCase();
-	    return mot;
 	}
 	
 	public static String saveFilein(String contenu, String file,String path) {
@@ -307,7 +305,7 @@ public class ExtraInfo {
 //========================================================================================//
 		buff = new BufferedReader(new FileReader("medic"));
 		ecrire3 = new PrintWriter("medic.dic");
-
+		ArrayList<String> arrayOfStrings = new ArrayList<String>();
 		do
 		// faire ce qui suit
 		{
@@ -320,14 +318,27 @@ public class ExtraInfo {
 			System.out.println(s);
 			
 			if (s!="") { 
-				String w= s.toLowerCase();
-				ecrire3.write(w);
-			        ecrire3.write(System.getProperty("line.separator"));}
+				arrayOfStrings.add(s);
+                HashSet<String> h = new HashSet<String>(arrayOfStrings);
+                arrayOfStrings.clear();
+                arrayOfStrings.addAll(h);
+			
+                }
 		} while (true);
+		
+		  /*=====trier la liste======*/
+		  Collections.sort(arrayOfStrings);
+		  
+		 for (String readline : arrayOfStrings){
+			
+			 ecrire3.write( readline.toLowerCase() + "\n");
+			
+		     }
 		// fermer le flux d'écriture
 		ecrire3.close();
 		// concatenation
 		ecrire3 = new PrintWriter(new FileOutputStream("medic.dic", true));
+		
 		JOptionPane.showMessageDialog(null, "Fin de creation mdic.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
 		ecrire3.close();
 //========================================================================================//
@@ -348,7 +359,6 @@ public class ExtraInfo {
 			System.out.println(s);
 			
 			if (s!="") {
-				s=miniscule(s);
 				ecrire4.write(s);
 			    ecrire4.write(System.getProperty("line.separator"));}
 
@@ -360,6 +370,4 @@ public class ExtraInfo {
 		JOptionPane.showMessageDialog(null, "Fin de creation subst.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
     System.exit(0);
 	}
-
 }
-
