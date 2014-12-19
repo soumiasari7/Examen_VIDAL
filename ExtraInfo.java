@@ -17,6 +17,7 @@ public class ExtraInfo {
 	private static BufferedReader buff2;
 	private static BufferedReader buff;
 	static int length=1;
+	
 	public static String recherche(String ligne){
 		String res="";
 		   pattern = Pattern.compile("<a href=\"Medicament/.*\">(\\D\\S*)$*");
@@ -56,10 +57,25 @@ public class ExtraInfo {
 	    return mot;
 	}
 	
+	public static String saveFilein(String contenu, String file,String path) {
+		String d=path+"\\"+file;
+		try {
+			System.out.print(d);
+			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(d)));
+ 
+			writer.write(contenu);
+ 
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		char c;
 		String urlstart = null;
-		
+		String nomfich;
 		try {
 // =====================Creation boite de Saisi URL=========================//
 			urlstart = JOptionPane.showInputDialog(null, "URL", "Entree",
@@ -70,30 +86,6 @@ public class ExtraInfo {
 					conn.getInputStream()));
 			in.readLine();
 			in.close();
-			
-// =========================Boîte de saisie du nom de fichier contenant le résultat asprie======//
-			new JOptionPane();
-			String nomfich = JOptionPane.showInputDialog(null, "File name ","Entree", JOptionPane.QUESTION_MESSAGE);
-			System.out.print("\n" + nomfich);
-			
-// ======enregistré dans un emplacement selon le choix de l’utilisateur via une boîte de dialogue==========//
-			JFileChooser filesave = new JFileChooser();
-             /* Créer un JFileChooser */
-			filesave.setName(nomfich);
-			filesave.setCurrentDirectory(new File("."));
-			/* Le répertoire source du JFileChooser est le répertoire d’où est lancé notre programme*/
-			String approve = new String("Ouvrir");
-			/* Le bouton pour valider l’enregistrement portera la mentionENREGSITRER*/
-			int resultatEnregistrer = filesave.showSaveDialog(filesave);
-			String Path=filesave.getSelectedFile().getPath();
-			// Pour afficher le JFileChooser…
-			if (resultatEnregistrer == JFileChooser.APPROVE_OPTION)
-			// Si l’utilisateur clique sur le bouton ENREGSITRER
-			{
-				String monFichier = new String(filesave.getSelectedFile().toString());
-				// Récupérer le nom du fichier qu’il a spécifié
-				System.out.print("\n" + monFichier);
-			}
 		}
 // ====================Erreur probleme connexion==============//
 		
@@ -143,7 +135,8 @@ public class ExtraInfo {
 		JFrame frame = new JFrame("ProgressBar");
 		frame.setTitle("Aspiration...");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2 - frame.getWidth()/2, dim.height/2 - frame.getHeight()/2);
 		
 // ------------ Ajout des composante il faut qu'il soit dans cette ordre a cause de la fontion .pack()----/
 		
@@ -160,15 +153,37 @@ public class ExtraInfo {
 		panel1.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		frame.setContentPane(panel1);
 		frame.setVisible(true);
-
+// =========================Boîte de saisie du nom de fichier contenant le résultat asprie======//
+		new JOptionPane();
+		nomfich = JOptionPane.showInputDialog(null, "File name ","Entree", JOptionPane.QUESTION_MESSAGE);
+		System.out.print("\n" + nomfich);
+					
                     /* ==================================================================*
                      *                                                                   *
                      *                   Les Médicaments par Substutance                 *
                      *                                                                   *
                      * ==================================================================*/
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setCurrentDirectory(new File("."));
 		
+		int resultatEnregistrer = chooser.showSaveDialog(chooser);
+		String approve = new String("Ouvrir");
+
+
+		if (resultatEnregistrer == JFileChooser.APPROVE_OPTION)
+		// Si l’utilisateur clique sur le bouton ENREGSITRER
+		{ chooser.getSelectedFile().getPath();
+		  
+		  //nomfich.endsWith(".txt")?nomfich:nomfich+".txt";
+          chooser.setName(nomfich);
+		  
+		
+		}String path= chooser.getSelectedFile().getAbsolutePath();
+		String file=saveFilein("", nomfich,path);
+		//ecrire=new PrintWriter(file);
+		ecrire=new PrintWriter(file);
 		JOptionPane.showMessageDialog(null,"Debut de l’aspiration Medicament par substutance", "Message",JOptionPane.INFORMATION_MESSAGE);
-		ecrire = new PrintWriter("subst");
 		for (c = 'A'; c <= 'Z'; c++) {
 			progressBar2.setValue(c);
 			label.setText("En cours ...");
@@ -196,6 +211,7 @@ public class ExtraInfo {
 				ecrire.write(line);
 				// générer dans sauts de ligne
 				ecrire.write(System.getProperty("line.separator"));
+				// tant que c'est vrai (true)
 				length++;
 			} while (true);
 			progressBar.setMaximum(length);
@@ -203,7 +219,7 @@ public class ExtraInfo {
 			// fermer le flux d'écriture
 			ecrire.close();
 			// concatenation
-			ecrire = new PrintWriter(new FileOutputStream("subst", true));
+			ecrire = new PrintWriter(new FileOutputStream(file, true));
 			// ========barre de progresion=========
 		}
 		JOptionPane.showMessageDialog(null,"Fin de l’aspiration Medicament par substutance", "Message",JOptionPane.INFORMATION_MESSAGE);
@@ -215,34 +231,34 @@ public class ExtraInfo {
          *                                                                   *
          * ==================================================================*/
 
-		ecrire2 = new PrintWriter("medic");
-
 // =========================Boîte de saisie du nom de fichier contenant le résultat asprie======//
 		
 		new JOptionPane();
-		String nomfich = JOptionPane.showInputDialog(null, "File name ","Entree", JOptionPane.QUESTION_MESSAGE);
-		System.out.print("\n" + nomfich);
+		 String nomfich2 = JOptionPane.showInputDialog(null, "File name ","Entree", JOptionPane.QUESTION_MESSAGE);
+		System.out.print("\n" + nomfich2);
 		
 // ======enregistré dans un emplacement selon le choix de l’utilisateur via une boîte de dialogue==========//
 		
-		JFileChooser filechoose = new JFileChooser();
-		// Créer un JFileChooser
-		filechoose.setCurrentDirectory(new File("."));
-		// Le répertoire source du JFileChooser est le répertoire d’où est lancé
-		// notre programme
-		String approve = new String("Ouvrir");
-		// Le bouton pour valider l’enregistrement portera la mentionENREGSITRER
-		int resultatEnregistrer = filechoose.showDialog(filechoose, approve);
-		filechoose.setName(nomfich);
-		// Pour afficher le JFileChooser…
-		if (resultatEnregistrer == JFileChooser.APPROVE_OPTION)
+		JFileChooser chooser2 = new JFileChooser();
+		chooser2.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser2.setCurrentDirectory(new File("."));
+		
+		int resultatEnregistrer2 = chooser2.showSaveDialog(chooser2);
+		String approve2 = new String("Ouvrir");
+
+
+		if (resultatEnregistrer2 == JFileChooser.APPROVE_OPTION)
 		// Si l’utilisateur clique sur le bouton ENREGSITRER
-		{
-			String monFichier = new String(filechoose.getSelectedFile()
-					.toString());
-			// Récupérer le nom du fichier qu’il a spécifié
-			System.out.print("\n" + monFichier);
-		}
+		{ chooser2.getSelectedFile().getPath();
+		  
+		  //nomfich.endsWith(".txt")?nomfich:nomfich+".txt";
+          chooser2.setName(nomfich2);
+		  
+		
+		}String path2= chooser2.getSelectedFile().getAbsolutePath();
+		String file2=saveFilein("", nomfich2,path2);
+		//ecrire=new PrintWriter(file);
+		ecrire2=new PrintWriter(file2);
 
 		for (c = 'A'; c <= 'Z'; c++) {
 			progressBar2.setValue(c);
@@ -280,7 +296,7 @@ public class ExtraInfo {
 			length=1;
 			ecrire2.close();
 			// concatenation
-			ecrire2 = new PrintWriter(new FileOutputStream("medic", true));
+			ecrire2 = new PrintWriter(new FileOutputStream(file2, true));
 			// ========barre de progresion=========
 			progressBar.setValue(0);
 		}
@@ -346,3 +362,4 @@ public class ExtraInfo {
 	}
 
 }
+
