@@ -12,8 +12,14 @@ import java.awt.event.InputEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -25,21 +31,30 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 
-	
+
+ class Panneau extends JPanel {
+	  public void paintComponent(Graphics g){
+	    try {
+	      Image img = ImageIO.read(new File("ows.png"));
+	      //g.drawImage(img, 0, 0, this);
+	      //Pour une image de fond
+	      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }                
+	  
+	  }
+ }
 	class feneter extends JPanel {
-	    
-		feneter()
+	feneter()
 	    {
 		setPreferredSize(new Dimension(500, 500));
-		setBackground(Color.BLUE);//insertion de limage
-		setForeground(Color.YELLOW);
 	    }
 	    
-	    public void paintComponent(Graphics g) {
+	  public void paintComponent(Graphics g) {
 		int largeur = getWidth();
 		int hauteur = getHeight();
-		
-		super.paintComponent(g);
+        super.paintComponent(g);
 	    }
 	}
 	
@@ -121,18 +136,26 @@ import javax.swing.KeyStroke;
 	}
 	
 	public class Menu extends JFrame {
-	    Menu() throws IOException {
+		Panneau p=new Panneau();
+		Menu() throws IOException {
 		feneter ardoise = new feneter();
+		
+		
 		this.setTitle("Extraction d'information");
 		
 		JMenuBar barreMenu = new BarreMenu(ardoise);
 
-		setJMenuBar(barreMenu);		
-		add(ardoise, BorderLayout.CENTER);
+		setJMenuBar(barreMenu);
+				
+        add(ardoise, BorderLayout.CENTER);
+        getContentPane().add(p);
+        setPreferredSize(new Dimension(650, 650));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setLocation(100, 100);
 		pack();
 		setVisible(true);
 	    }
+
 	}
 	
