@@ -51,6 +51,11 @@ public class ExtraInfo {
 		    return res1;
 	}
 	
+	public static String miniscule(String mot){
+		mot.toLowerCase();
+	    return mot;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		char c;
 		String urlstart = null;
@@ -135,7 +140,7 @@ public class ExtraInfo {
 		
 // -------------La Fenantre-----------------------------------------------//
 		
-		JFrame frame = new JFrame("ProgressBarDemo");
+		JFrame frame = new JFrame("ProgressBar");
 		frame.setTitle("Aspiration...");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -225,7 +230,7 @@ public class ExtraInfo {
 		filechoose.setCurrentDirectory(new File("."));
 		// Le répertoire source du JFileChooser est le répertoire d’où est lancé
 		// notre programme
-		String approve = new String("Choisir l'emplacement d'enregistement du ficher aspire");
+		String approve = new String("Ouvrir");
 		// Le bouton pour valider l’enregistrement portera la mentionENREGSITRER
 		int resultatEnregistrer = filechoose.showDialog(filechoose, approve);
 		filechoose.setName(nomfich);
@@ -258,7 +263,7 @@ public class ExtraInfo {
 			do
 			// faire ce qui suit
 			{
-				progressBar.setValue(c);
+				progressBar.setValue(length);
 				label2.setText("URL " + c);
 				String line = lire.readLine();
 				System.out.println(line);
@@ -269,8 +274,10 @@ public class ExtraInfo {
 				// générer dans sauts de ligne
 				ecrire2.write(System.getProperty("line.separator"));
 				// tant que c'est vrai (true)
+				length++;
 			} while (true);
-			// fermer le flux d'écriture
+			progressBar.setMaximum(length);
+			length=1;
 			ecrire2.close();
 			// concatenation
 			ecrire2 = new PrintWriter(new FileOutputStream("medic", true));
@@ -278,7 +285,7 @@ public class ExtraInfo {
 			progressBar.setValue(0);
 		}
 		JOptionPane.showMessageDialog(null, "Fin de l’aspiration !", "Message",JOptionPane.INFORMATION_MESSAGE);
-		progressBar2.disable();;
+		frame.hide();
 //========================================================================================//
 //                           ETAP2:lecture fichier medic                                  //
 //========================================================================================//
@@ -294,10 +301,12 @@ public class ExtraInfo {
 				break;
 			}
 			String s = recherche(line);
+			s=miniscule(s);
 			System.out.println(s);
 			
-			if (s!="") {ecrire3.write(s);
-			ecrire3.write(System.getProperty("line.separator"));}
+			if (s!="") { 
+				ecrire3.write(s);
+			    ecrire3.write(System.getProperty("line.separator"));}
 		} while (true);
 		// fermer le flux d'écriture
 		ecrire3.close();
@@ -322,8 +331,10 @@ public class ExtraInfo {
 			String s = recherche2(line);
 			System.out.println(s);
 			
-			if (s!="") {ecrire4.write(s);
-			ecrire4.write(System.getProperty("line.separator"));}
+			if (s!="") {
+				s=miniscule(s);
+				ecrire4.write(s);
+			    ecrire4.write(System.getProperty("line.separator"));}
 
 		} while (true);
 		// fermer le flux d'écriture
@@ -331,7 +342,7 @@ public class ExtraInfo {
 		// concatenation
 		ecrire4 = new PrintWriter(new FileOutputStream("subst.dic", true));
 		JOptionPane.showMessageDialog(null, "Fin de creation subst.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
-
+    System.exit(0);
 	}
 
 }
