@@ -303,8 +303,10 @@ public class ExtraInfo {
 //========================================================================================//
 //                           ETAP2:lecture fichier medic                                  //
 //========================================================================================//
+		
 		buff = new BufferedReader(new FileReader("medic"));
-		ecrire3 = new PrintWriter("medic.dic");
+		ecrire3 =new BufferedWriter(new OutputStreamWriter(new FileOutputStream("medic.dic"), "UTF-16"));
+
 		ArrayList<String> arrayOfStrings = new ArrayList<String>();
 		do
 		// faire ce qui suit
@@ -337,7 +339,7 @@ public class ExtraInfo {
 		// fermer le flux d'écriture
 		ecrire3.close();
 		// concatenation
-		ecrire3 = new PrintWriter(new FileOutputStream("medic.dic", true));
+		ecrire3 =new BufferedWriter(new OutputStreamWriter(new FileOutputStream("medic.dic", true), "UTF-16"));
 		
 		JOptionPane.showMessageDialog(null, "Fin de creation mdic.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
 		ecrire3.close();
@@ -346,7 +348,7 @@ public class ExtraInfo {
 //========================================================================================//
 		
 		buff2 = new BufferedReader(new FileReader("subst"));
-        ecrire4 = new PrintWriter("subst.dic");
+        ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic"), "UTF-16LE"));
 		do
 		// faire ce qui suit
 		{
@@ -366,8 +368,10 @@ public class ExtraInfo {
 		// fermer le flux d'écriture
 		ecrire4.close();
 		// concatenation
-		ecrire4 = new PrintWriter(new FileOutputStream("subst.dic", true));
+		ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic", true), "UTF-16LE"));
+			
 		JOptionPane.showMessageDialog(null, "Fin de creation subst.dic !", "Message",JOptionPane.INFORMATION_MESSAGE);
+		
     System.exit(0);
 	}
 }
