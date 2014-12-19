@@ -19,7 +19,7 @@ public class ExtraInfo {
 	static int length=1;
 	public static String recherche(String ligne){
 		String res="";
-		   pattern = Pattern.compile("<a href=\"Medicament.*>(.*)?<");
+		   pattern = Pattern.compile("<a href=\"Medicament/.*\">(\\D\\S*)$*");
 		   matcher = pattern.matcher(ligne);
 
 
@@ -301,12 +301,12 @@ public class ExtraInfo {
 				break;
 			}
 			String s = recherche(line);
-			s=miniscule(s);
 			System.out.println(s);
 			
 			if (s!="") { 
-				ecrire3.write(s);
-			    ecrire3.write(System.getProperty("line.separator"));}
+				String w= s.toLowerCase();
+				ecrire3.write(w);
+			        ecrire3.write(System.getProperty("line.separator"));}
 		} while (true);
 		// fermer le flux d'écriture
 		ecrire3.close();
