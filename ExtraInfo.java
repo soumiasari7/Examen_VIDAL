@@ -266,7 +266,7 @@ public class ExtraInfo {
 		for (c = 'A'; c <= 'Z'; c++) {
 			if (c=='D'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-D.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='E';}
 			else if (c=='M'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-M.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-N.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='O';}
+                          JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-N.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='O';}
 			else if (c=='S'){JOptionPane.showMessageDialog(null, " problème de connexion à l'URL http://www.vidal.fr/Sommaires/Medicaments-S.htm !", "Message",JOptionPane.INFORMATION_MESSAGE);c='T';}
 			
 			progressBar2.setValue(c);
@@ -358,7 +358,8 @@ public class ExtraInfo {
 //		                     ETAP2:lecture fichier subst                                  //
 //========================================================================================//
 		
-		buff2 = new BufferedReader(new FileReader("subst"));
+	buff2 = new BufferedReader(new InputStreamReader(new FileInputStream("subst"), "UTF-8"));
+	
         ecrire4 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("subst.dic"), "UTF-16"));
 		do
 		// faire ce qui suit
