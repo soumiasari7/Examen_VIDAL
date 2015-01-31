@@ -1,41 +1,32 @@
 package components;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 
- class Panneau extends JPanel {
+
+ @SuppressWarnings("serial")
+class Panneau extends JPanel {
 	 Ouvrir o=new Ouvrir();
 	 public void paintComponent(Graphics g){
 	    try {
-	      Image img = ImageIO.read(new File("ows.png"));
+	      Image img = ImageIO.read(new File("EI.jpg"));
 	      //g.drawImage(img, 0, 0, this);
 	      //Pour une image de fond
 	      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -45,6 +36,8 @@ import javax.swing.KeyStroke;
 	  
 	  }
  }
+	
+	@SuppressWarnings("serial")
 	class feneter extends JPanel {
 	feneter()
 	    {
@@ -52,21 +45,18 @@ import javax.swing.KeyStroke;
 	    }
 	    
 	  public void paintComponent(Graphics g) {
-		int largeur = getWidth();
-		int hauteur = getHeight();
+		getWidth();
+		getHeight();
         super.paintComponent(g);
 	    }
 	}
 	
+	@SuppressWarnings("serial")
 	class MenuTexte extends JMenu implements ActionListener {
 	    feneter feneter;
 	    JMenuItem itemOuvrir = new JMenuItem("Ouvrir",KeyEvent.VK_O);
 	    JMenuItem itemQuitter = new JMenuItem("Quitter", KeyEvent.VK_Q);
-		private Ouvrir o;
-		
-
-
-	    MenuTexte(final feneter fen) {
+		MenuTexte(final feneter fen) {
 		
 		setText("Texte");
 		this.feneter = fen;
@@ -92,6 +82,7 @@ import javax.swing.KeyStroke;
 		else if (source == itemQuitter) System.exit(0);
 	    }
    }
+	@SuppressWarnings("serial")
 	class MenuDictionnaire extends JMenu implements ActionListener {
 	    feneter feneter;
 	    JMenuItem itemAspiration = new JMenuItem("Aspiration",KeyEvent.VK_A);
@@ -126,13 +117,15 @@ import javax.swing.KeyStroke;
 	    
 	    public void actionPerformed(ActionEvent evt) {
 		Object source = evt.getSource();
-		if (source == itemAspiration) {Aspiration a =new Aspiration();
-		                                      try {
-										            a.bar();
-									              } catch (IOException e) {
-										
-										          e.printStackTrace();
-									                                      }                               
+		if (source == itemAspiration) {
+		                                try {
+		                                	Aspiration	tt=new Aspiration();
+											tt.start();
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}       
+									                                                                 
 		                               }//Aspiration
 		else if (source == itemTran)  {
 			                            TransofmationDELA t=new TransofmationDELA();
@@ -147,6 +140,7 @@ import javax.swing.KeyStroke;
 		else if (source == itemQuitter) System.exit(0);
 	    }
    }
+	@SuppressWarnings("serial")
 	class BarreMenu extends JMenuBar {
 	    BarreMenu(feneter fen) {	
 	    add(new MenuTexte(fen));
@@ -154,6 +148,7 @@ import javax.swing.KeyStroke;
 	    }
 	}
 	
+	@SuppressWarnings("serial")
 	public class Menu extends JFrame {
 		Panneau p=new Panneau();
 		Menu() throws IOException {

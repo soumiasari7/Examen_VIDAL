@@ -1,30 +1,15 @@
 package components;
 
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.ButtonGroup;
-import javax.swing.JMenuBar;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -43,7 +28,6 @@ public class Ouvrir implements ActionListener {
 		contentPane.setOpaque(true);
 
 		charge = new JButton("Charger le dico");
-		charge.getSize(new Dimension(10,10));
 		charge.addActionListener(this);
 
 		// Create a scrolled text area.
@@ -52,6 +36,7 @@ public class Ouvrir implements ActionListener {
 		scrollPane = new JScrollPane(output);
 		// Add the text area to the content pane.
 		contentPane.add(scrollPane, BorderLayout.CENTER);
+
 		contentPane.add(charge, BorderLayout.SOUTH);
 
 		filter = new FileFilter() {
@@ -88,7 +73,7 @@ public class Ouvrir implements ActionListener {
 
 	public String readFile(String file) {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-16"));
 			String ligne;
 			StringBuffer fichier = new StringBuffer();
 
